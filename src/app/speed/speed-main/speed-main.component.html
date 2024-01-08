@@ -1,0 +1,38 @@
+<div [@changeColor]="colorState"
+    (@changeColor.done)="onAnimationEvent($event)"
+    class="div-body">
+    <div class="title">
+        <p>Emoji Speed Game</p>
+    </div>
+    <div class="intro" *ngIf="screen == 'intro'">
+        <p>Try to find the requested emoji as many times as you can in the given time.</p>
+        <p>Clicking the wrong emoji will give you a 2 second penalty!</p>
+        <p class="mt20"><button (click)="startBtnClick('easy')">▶️ EASY</button></p>
+        <p class="mt20"><button (click)="startBtnClick('normal')">▶️ NORMAL</button></p>
+        <p class="mt20"><button (click)="startBtnClick('hard')">▶️ HARD</button></p>
+    </div>
+    <div class="mt20" *ngIf="screen == 'game'">
+        <div class="div-hub" [style.width.px]="mainWidth">
+            <div class="div-hub-part div-time" [style.width.px]="partWidth">
+                {{time}}
+            </div>
+            <div class="div-hub-part div-target" [style.width.px]="partWidth">
+                <speed-item [item]="targetItem"></speed-item>
+            </div>
+            <div class="div-hub-part div-points" [style.width.px]="partWidth">
+                {{points}}
+            </div>
+        </div>
+        <div class="div-main" [style.width.px]="mainWidth">
+            <div *ngFor="let item of items" class="div-item">
+                <speed-item (click)="onSelect(item)" [item]="item"></speed-item>
+            </div>
+        </div>
+    </div>
+    <div class="intro" *ngIf="screen == 'end'">
+        <p>Time's up! Your score was:</p>
+        <p>{{points}}</p>
+        <p class="mt20"><button (click)="retry()">🔁 TRY AGAIN</button></p>
+        <p class="mt20"><button (click)="back()">◀ BACK</button></p>
+    </div>
+</div>
