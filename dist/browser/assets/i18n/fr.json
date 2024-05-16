@@ -1,0 +1,11 @@
+{
+    "intro1": "Essayez de trouver l'emoji affiché autant de fois que possible dans le temps imparti.",
+    "intro2": "Cliquer sur le mauvais emoji a une pénalité de 2 secondes !",
+    "easy": "FACILE",
+    "normal": "NORMALE",
+    "hard": "DIFFICILE",
+    "tryAgain": "RECOMMENCER",
+    "back": "RETOURNER",
+    "timeUp": "Le temps s'est écoulé! Ton score est:",
+    "title": "Emoji Speed Game"
+}

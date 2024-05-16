@@ -5,12 +5,13 @@ import { AnimationEvent, trigger, state, style, animate, transition } from '@ang
 import { EmojiGenerator } from '../../common/emoji-generator-v2';
 import { SpeedItemComponent } from '../speed-item/speed-item.component';
 import { NgFor, NgIf } from '@angular/common';
+import { TranslocoDirective } from '@jsverse/transloco';
 
 
 @Component({
   standalone: true,
   selector: 'speed-main',
-  imports: [SpeedItemComponent, NgIf, NgFor],
+  imports: [SpeedItemComponent, NgIf, NgFor, TranslocoDirective],
   templateUrl: './speed-main.component.html',
   styleUrls: ['./speed-main.component.scss'],
   animations: [
@@ -45,9 +46,11 @@ export class SpeedMainComponent {
   screen:string = "intro";
   colorState: string = 'normal';
 
+  language: string = 'en';
+
   constructor() {
     
-
+    this.language = navigator.language.split('-')[0];
     //this.subscription = interval(1000).subscribe(() => {
       /*if(this.screen == "game"){
         if(this.seconds > 0){
@@ -67,8 +70,6 @@ export class SpeedMainComponent {
 
     this.mainWidth = this.numCols * 50;
     this.partWidth = this.mainWidth / 3;
-
-    this.createItems();
   }
 
   createItems(){
@@ -121,6 +122,7 @@ export class SpeedMainComponent {
 
   refreshTime(){
     let secNum = Math.floor(this.seconds);
+    if(secNum < 0) secNum = 0;
     let m = Math.floor(secNum / 60).toString().padStart(2, '0');
     let s = (secNum - (m as any * 60)).toString().padStart(2, '0');
     this.time = `${m}:${s}`;
@@ -140,9 +142,15 @@ export class SpeedMainComponent {
         break;
     }
 
+    this.startGame();
+  }
+
+  startGame(){
+    this.points = 0;
+    this.seconds = 60;
     this.refreshTime();
     
-    if(!this.subscription){
+    if(!this.subscription || this.subscription == Subscription.EMPTY){
       this.subscription = this.timeInterval.subscribe((integer) => {
         if(this.screen == "game"){
           if(this.seconds > 0){
@@ -159,8 +167,8 @@ export class SpeedMainComponent {
       });
     }
 
-    this.points = 0;
-    this.seconds = 60;
+    this.createItems();
+
     this.screen = "game";
   }
 
@@ -170,10 +178,7 @@ export class SpeedMainComponent {
   }
 
   retry(){
-    this.points = 0;
-    this.seconds = 60;
-    this.createItems();
-    this.screen = "game";
+    this.startGame();
   }
 
   back(){

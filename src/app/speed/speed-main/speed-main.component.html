@@ -1,15 +1,16 @@
+<ng-container *transloco="let t; lang: language">
 <div [@changeColor]="colorState"
     (@changeColor.done)="onAnimationEvent($event)"
     class="div-body">
     <div class="title">
-        <p>Emoji Speed Game</p>
+        <p>{{ t('title') }}</p>
     </div>
     <div class="intro" *ngIf="screen == 'intro'">
-        <p>Try to find the requested emoji as many times as you can in the given time.</p>
-        <p>Clicking the wrong emoji will give you a 2 second penalty!</p>
-        <p class="mt20"><button (click)="startBtnClick('easy')">▶️ EASY</button></p>
-        <p class="mt20"><button (click)="startBtnClick('normal')">▶️ NORMAL</button></p>
-        <p class="mt20"><button (click)="startBtnClick('hard')">▶️ HARD</button></p>
+        <p class="mt20 lh30">{{ t('intro1') }}</p>
+        <p class="mt20 lh30">{{ t('intro2') }}</p>
+        <p class="mt20 lh30"><button class="w100" (click)="startBtnClick('easy')">😊 {{ t('easy') }}</button></p>
+        <p class="mt20 lh30"><button class="w100" (click)="startBtnClick('normal')">😐 {{ t('normal') }}</button></p>
+        <p class="mt20 lh30"><button class="w100" (click)="startBtnClick('hard')">🥵 {{ t('hard') }}</button></p>
     </div>
     <div class="mt20" *ngIf="screen == 'game'">
         <div class="div-hub" [style.width.px]="mainWidth">
@@ -30,9 +31,10 @@
         </div>
     </div>
     <div class="intro" *ngIf="screen == 'end'">
-        <p>Time's up! Your score was:</p>
+        <p>{{ t('timeUp') }}</p>
         <p>{{points}}</p>
-        <p class="mt20"><button (click)="retry()">🔁 TRY AGAIN</button></p>
-        <p class="mt20"><button (click)="back()">◀ BACK</button></p>
+        <p class="mt20"><button (click)="retry()">🔁 {{ t('tryAgain') }}</button></p>
+        <p class="mt20"><button (click)="back()">◀ {{ t('back') }}</button></p>
     </div>
 </div>
+</ng-container>
