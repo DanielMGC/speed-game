@@ -1,5 +1,5 @@
 module.exports = {
-  rootTranslationsPath: './assets/i18n/',
+  rootTranslationsPath: './speed-game/browser/assets/i18n/',
   langs: ['en', 'es', 'pt', 'fr'],
   keysManager: {}
 };
