@@ -3,7 +3,7 @@
     (@changeColor.done)="onAnimationEvent($event)"
     class="div-body">
     <div class="title">
-        <p>{{ t('title') }}</p>
+        <p class="mt20">{{ t('title') }}</p>
     </div>
     <div class="intro" *ngIf="screen == 'intro'">
         <p class="mt20 lh30">{{ t('intro1') }}</p>
@@ -25,16 +25,25 @@
             </div>
         </div>
         <div class="div-main" [style.width.px]="mainWidth">
-            <div *ngFor="let item of items" class="div-item">
+            <div *ngFor="let item of items" class="div-item" [style.width.px]="sizeItem" [style.height.px]="sizeItem" [style.font-size.px]="itemFontSize">
                 <speed-item (click)="onSelect(item)" [item]="item"></speed-item>
             </div>
         </div>
     </div>
     <div class="intro" *ngIf="screen == 'end'">
-        <p>{{ t('timeUp') }}</p>
-        <p>{{points}}</p>
+        <p class="mt20">{{ t('timeUp') }}</p>
+        <p class="mt20">{{points}}</p>
         <p class="mt20"><button (click)="retry()">🔁 {{ t('tryAgain') }}</button></p>
         <p class="mt20"><button (click)="back()">◀ {{ t('back') }}</button></p>
+        <p>
+            <share-button [theme]="'circles-dark'"
+            [button]="'whatsapp'"
+            [url]="'https://danielmgc.github.io/speed-game/browser/'+points+'/'+mode"
+            [title]="'I invite you to beat my score'"
+            [description]="'I invite you to beat my score'"
+            [autoSetMeta]="false"
+            ></share-button>
+        </p>
     </div>
 </div>
 </ng-container>

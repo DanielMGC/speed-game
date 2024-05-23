@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { BrowserModule, Meta } from '@angular/platform-browser';
 import { SpeedItem } from '../models/speed-item.interface';
 import { interval, Subscription } from 'rxjs';
 import { AnimationEvent, trigger, state, style, animate, transition } from '@angular/animations';
@@ -6,12 +7,16 @@ import { EmojiGenerator } from '../../common/emoji-generator-v2';
 import { SpeedItemComponent } from '../speed-item/speed-item.component';
 import { NgFor, NgIf } from '@angular/common';
 import { TranslocoDirective } from '@jsverse/transloco';
-
+import { ShareButtonsModule  } from 'ngx-sharebuttons/buttons';
+import { ShareIconsModule } from 'ngx-sharebuttons/icons';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   standalone: true,
   selector: 'speed-main',
-  imports: [SpeedItemComponent, NgIf, NgFor, TranslocoDirective],
+  imports: [SpeedItemComponent, NgIf, NgFor, TranslocoDirective, ShareButtonsModule, FontAwesomeModule, ShareIconsModule],
+  providers: [Meta],
   templateUrl: './speed-main.component.html',
   styleUrls: ['./speed-main.component.scss'],
   animations: [
@@ -48,28 +53,47 @@ export class SpeedMainComponent {
 
   language: string = 'en';
 
-  constructor() {
+  sizeItem: number = 50;
+  itemFontSize: number = 20;
+  mode: string = "";
+
+  constructor(private metaService: Meta, private activatedroute:ActivatedRoute) {
     
+    var score=this.activatedroute.snapshot.paramMap.get("score");
+    var mode=this.activatedroute.snapshot.paramMap.get("mode");
+
     this.language = navigator.language.split('-')[0];
-    //this.subscription = interval(1000).subscribe(() => {
-      /*if(this.screen == "game"){
-        if(this.seconds > 0){
-          this.seconds--;
     
-          this.refreshTime();
-        } else {
-          this.screen = "end";
-        }
-      }*/
-    //});
+    if(score != null && mode != null)
+      this.metaService.addTag({ name: 'description', content: 'I invite you to beat my score of ' + score + ' on ' + mode + ' mode!'});
+    else
+    this.metaService.addTag({ name: 'description', content: 'How much can you score?'});
+    this.metaService.addTag({ property: 'og:title', content: 'Emoji Speed Game' });
+    
   }
 
   createBoard(numCols:number, numRows: number){
     this.numCols = numCols;
     this.numRows = numRows;
 
-    this.mainWidth = this.numCols * 50;
+    this.itemFontSize = 20;
+    this.sizeItem = 50;
+
+    this.mainWidth = this.numCols * this.sizeItem;
     this.partWidth = this.mainWidth / 3;
+
+    var screenWidth = window.innerWidth;
+
+    if(this.mainWidth > screenWidth){
+        this.mainWidth = screenWidth;
+        this.sizeItem = this.mainWidth / this.numCols;
+        if(this.itemFontSize - this.sizeItem < 10) {
+          this.itemFontSize = this.sizeItem - 10;
+          if(this.itemFontSize <= 0) {
+            this.itemFontSize = this.sizeItem;
+          }
+        }
+    }
   }
 
   createItems(){
@@ -141,7 +165,7 @@ export class SpeedMainComponent {
         this.createBoard(15, 15);
         break;
     }
-
+    this.mode = mode;
     this.startGame();
   }
 
