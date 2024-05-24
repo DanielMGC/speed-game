@@ -3,14 +3,14 @@
     (@changeColor.done)="onAnimationEvent($event)"
     class="div-body">
     <div class="title">
-        <p class="mt20">{{ t('title') }}</p>
+        <p class="mt20">{{ t('title') }} {{route}}</p>
     </div>
     <div class="intro" *ngIf="screen == 'intro'">
         <p class="mt20 lh30">{{ t('intro1') }}</p>
         <p class="mt20 lh30">{{ t('intro2') }}</p>
-        <p class="mt20 lh30"><button class="w100" (click)="startBtnClick('easy')">😊 {{ t('easy') }}</button></p>
-        <p class="mt20 lh30"><button class="w100" (click)="startBtnClick('normal')">😐 {{ t('normal') }}</button></p>
-        <p class="mt20 lh30"><button class="w100" (click)="startBtnClick('hard')">🥵 {{ t('hard') }}</button></p>
+        <p class="mt20 lh30"><button class="w120" (click)="startBtnClick('easy')">😊 {{ t('easy') }}</button></p>
+        <p class="mt20 lh30"><button class="w120" (click)="startBtnClick('normal')">😐 {{ t('normal') }}</button></p>
+        <p class="mt20 lh30"><button class="w120" (click)="startBtnClick('hard')">🥵 {{ t('hard') }}</button></p>
     </div>
     <div class="mt20" *ngIf="screen == 'game'">
         <div class="div-hub" [style.width.px]="mainWidth">
@@ -38,7 +38,7 @@
         <p>
             <share-button [theme]="'circles-dark'"
             [button]="'whatsapp'"
-            [url]="'https://danielmgc.github.io/speed-game/browser/'+points+'/'+mode"
+            [url]="'https://danielmgc.github.io/speed-game/browser/speed/'+points+'/'+mode"
             [title]="'I invite you to beat my score'"
             [description]="'I invite you to beat my score'"
             [autoSetMeta]="false"

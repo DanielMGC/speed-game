@@ -10,7 +10,7 @@ import { TranslocoDirective } from '@jsverse/transloco';
 import { ShareButtonsModule  } from 'ngx-sharebuttons/buttons';
 import { ShareIconsModule } from 'ngx-sharebuttons/icons';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   standalone: true,
@@ -57,17 +57,19 @@ export class SpeedMainComponent {
   itemFontSize: number = 20;
   mode: string = "";
 
-  constructor(private metaService: Meta, private activatedroute:ActivatedRoute) {
+  route: string = "";
+
+  constructor(private metaService: Meta, private activatedroute:ActivatedRoute, router: Router) {
     
     var score=this.activatedroute.snapshot.paramMap.get("score");
     var mode=this.activatedroute.snapshot.paramMap.get("mode");
-
+    this.route =  router.url;
     this.language = navigator.language.split('-')[0];
     
     if(score != null && mode != null)
-      this.metaService.addTag({ name: 'description', content: 'I invite you to beat my score of ' + score + ' on ' + mode + ' mode!'});
+      this.metaService.addTag({ name: 'description', property: 'og:description', content: `I invite you to beat my score of ${score} on ${mode} mode!`});
     else
-    this.metaService.addTag({ name: 'description', content: 'How much can you score?'});
+    this.metaService.addTag({ name: 'description', property: 'og:description', content: 'How much can you score?'});
     this.metaService.addTag({ property: 'og:title', content: 'Emoji Speed Game' });
     
   }
