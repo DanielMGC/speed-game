@@ -70,8 +70,8 @@ export class SpeedMainComponent {
       this.metaService.addTag({ name: 'description', property: 'og:description', content: `I invite you to beat my score of ${score} on ${mode} mode!`});
     else
     this.metaService.addTag({ name: 'description', property: 'og:description', content: 'How much can you score?'});
+    this.metaService.addTag({ name: 'image', property: 'og:image', content: 'https://danielmgc.github.io/speed-game/browser/assets/speed-emoji-game.png'});
     this.metaService.addTag({ property: 'og:title', content: 'Emoji Speed Game' });
-    
   }
 
   createBoard(numCols:number, numRows: number){
