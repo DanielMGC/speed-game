@@ -5,7 +5,7 @@ import { interval, Subscription } from 'rxjs';
 import { AnimationEvent, trigger, state, style, animate, transition } from '@angular/animations';
 import { EmojiGenerator } from '../../common/emoji-generator-v2';
 import { SpeedItemComponent } from '../speed-item/speed-item.component';
-import { NgFor, NgIf } from '@angular/common';
+import { HashLocationStrategy, LocationStrategy, NgFor, NgIf } from '@angular/common';
 import { TranslocoDirective } from '@jsverse/transloco';
 import { ShareButtonsModule  } from 'ngx-sharebuttons/buttons';
 import { ShareIconsModule } from 'ngx-sharebuttons/icons';
@@ -16,7 +16,7 @@ import { ActivatedRoute, Router } from '@angular/router';
   standalone: true,
   selector: 'speed-main',
   imports: [SpeedItemComponent, NgIf, NgFor, TranslocoDirective, ShareButtonsModule, FontAwesomeModule, ShareIconsModule],
-  providers: [Meta],
+  providers: [Meta, {provide: LocationStrategy, useClass: HashLocationStrategy}],
   templateUrl: './speed-main.component.html',
   styleUrls: ['./speed-main.component.scss'],
   animations: [
@@ -71,7 +71,7 @@ export class SpeedMainComponent {
     else
       this.metaService.addTag({ name: 'description', property: 'og:description', content: 'How much can you score?'});
     
-    this.metaService.addTag({ name: 'image', property: 'og:image', content: 'https://danielmgc.github.io/speed-game/browser/assets/speed-emoji-game.png'});
+    this.metaService.addTag({ property: 'og:image', content: 'https://danielmgc.github.io/speed-game/browser/assets/speed-emoji-game.png'});
     this.metaService.addTag({ property: 'og:title', content: 'Emoji Speed Game' });
   }
 
