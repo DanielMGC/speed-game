@@ -12,5 +12,6 @@
     "shareChallenge": "Try to beat my score of {0} in {1} mode of Speed Emoji Game!",
     "share": "Share your score and challenge your friends to beat it!",
     "challengeSuccess": "You beat your challenge of {0} points!",
-    "challengeFailure": "You failed to beat your challenge of {0} points..."
+    "challengeFailure": "You failed to beat your challenge of {0} points...",
+    "author": "by DanielMGC" 
 }
