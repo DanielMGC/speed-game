@@ -16,7 +16,7 @@ import { ActivatedRoute, Router } from '@angular/router';
   standalone: true,
   selector: 'speed-main',
   imports: [SpeedItemComponent, NgIf, NgFor, TranslocoDirective, ShareButtonsModule, FontAwesomeModule, ShareIconsModule],
-  providers: [Meta, {provide: LocationStrategy, useClass: HashLocationStrategy}],
+  providers: [Meta],
   templateUrl: './speed-main.component.html',
   styleUrls: ['./speed-main.component.scss'],
   animations: [
