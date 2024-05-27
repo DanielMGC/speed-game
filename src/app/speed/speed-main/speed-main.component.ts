@@ -6,11 +6,12 @@ import { AnimationEvent, trigger, state, style, animate, transition } from '@ang
 import { EmojiGenerator } from '../../common/emoji-generator-v2';
 import { SpeedItemComponent } from '../speed-item/speed-item.component';
 import { HashLocationStrategy, LocationStrategy, NgFor, NgIf } from '@angular/common';
-import { TranslocoDirective } from '@jsverse/transloco';
+import { TranslocoDirective, TranslocoService, translate, translateObject } from '@jsverse/transloco';
 import { ShareButtonsModule  } from 'ngx-sharebuttons/buttons';
 import { ShareIconsModule } from 'ngx-sharebuttons/icons';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ActivatedRoute, Router } from '@angular/router';
+import * as CryptoJS from 'crypto-js';
 
 @Component({
   standalone: true,
@@ -57,22 +58,22 @@ export class SpeedMainComponent {
   itemFontSize: number = 20;
   mode: string = "";
 
-  route: string = "";
+  challengeScore: number = 0;
+  challengeMode: string = "";
 
-  constructor(private metaService: Meta, private activatedroute:ActivatedRoute, router: Router) {
+  private cryptoKey = "2134nsadi9";
+
+  constructor(private activatedroute:ActivatedRoute, private translocoService: TranslocoService) {
     
-    var score=this.activatedroute.snapshot.paramMap.get("score");
-    var mode=this.activatedroute.snapshot.paramMap.get("mode");
-    this.route =  router.url;
+    var info: string =this.activatedroute.snapshot.paramMap.get("info") ?? "";
+
+    if(info != ""){
+      info = this.dec(info);
+      this.challengeScore = Number.parseInt(info.split(';')[0]);
+      this.challengeMode = info.split(';')[1];
+    }
     this.language = navigator.language.split('-')[0];
-    
-    if(score != null && mode != null)
-      this.metaService.addTag({ name: 'description', property: 'og:description', content: `I invite you to beat my score of ${score} on ${mode} mode!`});
-    else
-      this.metaService.addTag({ name: 'description', property: 'og:description', content: 'How much can you score?'});
-    
-    this.metaService.addTag({ property: 'og:image', content: 'https://danielmgc.github.io/speed-game/browser/assets/speed-emoji-game.png'});
-    this.metaService.addTag({ property: 'og:title', content: 'Emoji Speed Game' });
+  
   }
 
   createBoard(numCols:number, numRows: number){
@@ -81,9 +82,6 @@ export class SpeedMainComponent {
 
     this.itemFontSize = 20;
     this.sizeItem = 50;
-
-    this.mainWidth = this.numCols * this.sizeItem;
-    this.partWidth = this.mainWidth / 3;
 
     var screenWidth = window.innerWidth;
 
@@ -97,6 +95,10 @@ export class SpeedMainComponent {
           }
         }
     }
+
+    this.mainWidth = this.numCols * this.sizeItem;
+    this.partWidth = this.mainWidth / 3;
+
   }
 
   createItems(){
@@ -213,4 +215,29 @@ export class SpeedMainComponent {
     this.seconds = 60;
     this.screen = "intro";
   }
+
+  challengeInfo():string{
+    return this.enc(`${this.points.toString()};${this.mode}`).toString();
+  }
+
+  enc(plainText:string):string{
+    var b64 = CryptoJS.AES.encrypt(plainText, this.cryptoKey).toString();
+    var e64 = CryptoJS.enc.Base64.parse(b64);
+    var eHex = e64.toString(CryptoJS.enc.Hex);
+    return eHex;
+  }
+
+  dec(cipherText:string):string{
+    var reb64 = CryptoJS.enc.Hex.parse(cipherText);
+    var bytes = reb64.toString(CryptoJS.enc.Base64);
+    var decrypt = CryptoJS.AES.decrypt(bytes, this.cryptoKey);
+    var plain = decrypt.toString(CryptoJS.enc.Utf8);
+    return plain;
+  }
+
+  challengeText(baseTextKey:string, scoreVal: number, modeVal: string):string{
+    var baseText = this.translocoService.translate(baseTextKey, {}, this.language);
+    return baseText.replace('{0}', scoreVal.toString()).replace('{1}', this.translocoService.translate(modeVal, {}, this.language));
+  }
+
 }

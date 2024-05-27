@@ -7,5 +7,10 @@
     "tryAgain": "TRY AGAIN",
     "back": "BACK",
     "timeUp": "Time's up! Your score was:",
-    "title": "Emoji Speed Game"
+    "title": "Emoji Speed Game",
+    "challenge": "You were challenged to beat the score of {0} in {1} mode!",
+    "shareChallenge": "Try to beat my score of {0} in {1} mode of Speed Emoji Game!",
+    "share": "Share your score and challenge your friends to beat it!",
+    "challengeSuccess": "You beat your challenge of {0} points!",
+    "challengeFailure": "You failed to beat your challenge of {0} points..."
 }

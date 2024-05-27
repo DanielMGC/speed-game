@@ -3,11 +3,12 @@
     (@changeColor.done)="onAnimationEvent($event)"
     class="div-body">
     <div class="title">
-        <p class="mt20">{{ t('title') }}: {{route}}</p>
+        <p class="mt20">{{ t('title') }}</p>
     </div>
     <div class="intro" *ngIf="screen == 'intro'">
         <p class="mt20 lh30">{{ t('intro1') }}</p>
         <p class="mt20 lh30">{{ t('intro2') }}</p>
+        <p  *ngIf="challengeMode != ''" class="mt20 lh30 challenge">🔥 {{ challengeText('challenge', challengeScore, challengeMode) }} 🔥</p>
         <p class="mt20 lh30"><button class="w120" (click)="startBtnClick('easy')">😊 {{ t('easy') }}</button></p>
         <p class="mt20 lh30"><button class="w120" (click)="startBtnClick('normal')">😐 {{ t('normal') }}</button></p>
         <p class="mt20 lh30"><button class="w120" (click)="startBtnClick('hard')">🥵 {{ t('hard') }}</button></p>
@@ -33,15 +34,60 @@
     <div class="intro" *ngIf="screen == 'end'">
         <p class="mt20">{{ t('timeUp') }}</p>
         <p class="mt20">{{points}}</p>
+        <p *ngIf="challengeMode == mode && (points > challengeScore)" class="mt20">🤩 {{ challengeText('challengeSuccess', challengeScore, challengeMode) }}</p>
+        <p *ngIf="challengeMode == mode && (points <= challengeScore)" class="mt20">😭 {{ challengeText('challengeFailure', challengeScore, challengeMode) }}</p>
         <p class="mt20"><button (click)="retry()">🔁 {{ t('tryAgain') }}</button></p>
         <p class="mt20"><button (click)="back()">◀ {{ t('back') }}</button></p>
+        <p class="mt20">🔥 {{t('share')}}</p>
         <p>
             <share-button [theme]="'circles-dark'"
-            [button]="'whatsapp'"
-            [url]="'https://danielmgc.github.io/speed-game/browser/speed/'+points+'/'+mode"
-            [title]="'I invite you to beat my score'"
-            [description]="'I invite you to beat my score'"
-            [autoSetMeta]="false"
+                [button]="'whatsapp'"
+                [url]="'https://speed-game-vert.vercel.app/speed/'+challengeInfo()"
+                [title]="'Emoji Speed Game'"
+                [description]="'⏱️' + challengeText('shareChallenge', points, mode)"
+                [autoSetMeta]="false"
+            ></share-button>
+            <share-button [theme]="'circles-dark'"
+                [button]="'facebook'"
+                [url]="'https://speed-game-vert.vercel.app/speed/'+challengeInfo()"
+                [title]="'Emoji Speed Game'"
+                [description]="'⏱️' + challengeText('shareChallenge', points, mode)"
+                [autoSetMeta]="false"
+            ></share-button>
+            <share-button [theme]="'circles-dark'"
+                [button]="'reddit'"
+                [url]="'https://speed-game-vert.vercel.app/speed/'+challengeInfo()"
+                [title]="'Emoji Speed Game'"
+                [description]="'⏱️' + challengeText('shareChallenge', points, mode)"
+                [autoSetMeta]="false"
+            ></share-button>
+            <share-button [theme]="'circles-dark'"
+                [button]="'messenger'"
+                [url]="'https://speed-game-vert.vercel.app/speed/'+challengeInfo()"
+                [title]="'Emoji Speed Game'"
+                [description]="'⏱️' + challengeText('shareChallenge', points, mode)"
+                [autoSetMeta]="false"
+            ></share-button>
+            <share-button [theme]="'circles-dark'"
+                [button]="'email'"
+                [url]="'https://speed-game-vert.vercel.app/speed/'+challengeInfo()"
+                [title]="'Emoji Speed Game'"
+                [description]="'⏱️' + challengeText('shareChallenge', points, mode)"
+                [autoSetMeta]="false"
+            ></share-button>
+            <share-button [theme]="'circles-dark'"
+                [button]="'sms'"
+                [url]="'https://speed-game-vert.vercel.app/speed/'+challengeInfo()"
+                [title]="'Emoji Speed Game'"
+                [description]="'⏱️' + challengeText('shareChallenge', points, mode)"
+                [autoSetMeta]="false"
+            ></share-button>
+            <share-button [theme]="'circles-dark'"
+                [button]="'copy'"
+                [url]="'https://speed-game-vert.vercel.app/speed/'+challengeInfo()"
+                [title]="'Emoji Speed Game'"
+                [description]="'⏱️' + challengeText('shareChallenge', points, mode)"
+                [autoSetMeta]="false"
             ></share-button>
         </p>
     </div>

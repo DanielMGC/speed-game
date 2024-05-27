@@ -7,5 +7,10 @@
     "tryAgain": "TENTAR NOVAMENTE",
     "back": "VOLTAR",
     "timeUp": " Acabou o tempo! Sua pontuação foi:",
-    "title": "Emoji Speed Game"
+    "title": "Emoji Speed Game",
+    "challenge": "Você foi desafiado(a) a superar a pontuação de {0} no modo {1}!",
+    "shareChallenge": "Tente superar a minha pontuação de {0} no modo {1} de Speed Emoji Game!",
+    "share": "Compartilhe sua pontuação e desafie seus amigos a superá-la!",
+    "challengeSuccess": "Você superou o seu desafio de {0} pontos!",
+    "challengeFailure": "Você falhou em superar o seu desafio de {0} pontos..."
 }

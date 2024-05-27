@@ -7,5 +7,10 @@
     "tryAgain": "RECOMMENCER",
     "back": "RETOURNER",
     "timeUp": "Le temps s'est écoulé! Ton score est:",
-    "title": "Emoji Speed Game"
+    "title": "Emoji Speed Game",
+    "challenge": "Vous avez été mis au défi de surpasser le score de {0} en mode {1}!",
+    "shareChallenge": "Essayez de surpasser mon score de {0} en mode {1} de Speed Emoji Game!",
+    "share": "Partagez votre score et défiez vos amis pour le surpasser!",
+    "challengeSuccess": "Vous avez réussi de surpasser votre défi de {0} points!",
+    "challengeFailure": "Yous n'avez pas réussi de surpasser votre défi de {0} points..."
 }
