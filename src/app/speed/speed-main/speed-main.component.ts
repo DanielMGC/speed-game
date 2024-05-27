@@ -83,6 +83,8 @@ export class SpeedMainComponent {
     this.itemFontSize = 20;
     this.sizeItem = 50;
 
+    this.mainWidth = this.numCols * this.sizeItem;
+
     var screenWidth = window.innerWidth;
 
     if(this.mainWidth > screenWidth){
@@ -96,7 +98,7 @@ export class SpeedMainComponent {
         }
     }
 
-    this.mainWidth = this.numCols * this.sizeItem;
+    
     this.partWidth = this.mainWidth / 3;
 
   }
