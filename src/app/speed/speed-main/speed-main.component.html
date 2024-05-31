@@ -9,10 +9,10 @@
     <div class="intro" *ngIf="screen == 'intro'">
         <p class="mt20 lh30">{{ t('intro1') }}</p>
         <p class="mt20 lh30">{{ t('intro2') }}</p>
-        <p  *ngIf="challengeMode != ''" class="mt20 lh30 challenge">🔥 {{ challengeText('challenge', challengeScore, challengeMode) }} 🔥</p>
-        <p class="mt20 lh30"><button class="w120" (click)="startBtnClick('easy')">😊 {{ t('easy') }}</button></p>
-        <p class="mt20 lh30"><button class="w120" (click)="startBtnClick('normal')">😐 {{ t('normal') }}</button></p>
-        <p class="mt20 lh30"><button class="w120" (click)="startBtnClick('hard')">🥵 {{ t('hard') }}</button></p>
+        <p  *ngIf="challengeMode != ''" class="mt20 lh30 challenge"><label class="lbl-emoji">🔥</label> {{ challengeText('challenge', challengeScore, challengeMode) }} <label class="lbl-emoji">🔥</label></p>
+        <p class="mt20 lh30"><button class="w140" (click)="startBtnClick('easy')"><label class="lbl-emoji">😊</label> {{ t('easy') }}</button></p>
+        <p class="mt20 lh30"><button class="w140" (click)="startBtnClick('normal')"><label class="lbl-emoji">😐</label> {{ t('normal') }}</button></p>
+        <p class="mt20 lh30"><button class="w140" (click)="startBtnClick('hard')"><label class="lbl-emoji">🥵</label> {{ t('hard') }}</button></p>
     </div>
     <div class="mt20" *ngIf="screen == 'game'">
         <div class="div-hub" [style.width.px]="mainWidth">
@@ -35,11 +35,11 @@
     <div class="intro" *ngIf="screen == 'end'">
         <p class="mt20">{{ t('timeUp') }}</p>
         <p class="mt20">{{points}}</p>
-        <p *ngIf="challengeMode == mode && (points > challengeScore)" class="mt20">🤩 {{ challengeText('challengeSuccess', challengeScore, challengeMode) }}</p>
-        <p *ngIf="challengeMode == mode && (points <= challengeScore)" class="mt20">😭 {{ challengeText('challengeFailure', challengeScore, challengeMode) }}</p>
-        <p class="mt20"><button (click)="retry()">🔁 {{ t('tryAgain') }}</button></p>
-        <p class="mt20"><button (click)="back()">◀ {{ t('back') }}</button></p>
-        <p class="mt20">🔥 {{t('share')}}</p>
+        <p *ngIf="challengeMode == mode && (points > challengeScore)" class="mt20"><label class="lbl-emoji">🤩</label> {{ challengeText('challengeSuccess', challengeScore, challengeMode) }}</p>
+        <p *ngIf="challengeMode == mode && (points <= challengeScore)" class="mt20"><label class="lbl-emoji">😭</label> {{ challengeText('challengeFailure', challengeScore, challengeMode) }}</p>
+        <p class="mt20"><button (click)="retry()"><label class="lbl-emoji">🔁</label> {{ t('tryAgain') }}</button></p>
+        <p class="mt20"><button (click)="back()"><label class="lbl-emoji">◀</label> {{ t('back') }}</button></p>
+        <p class="mt20"><label class="lbl-emoji">🔥</label> {{t('share')}}</p>
         <p>
             <share-button [theme]="'circles-dark'"
                 [button]="'whatsapp'"

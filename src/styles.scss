@@ -11,3 +11,13 @@ body, html {
     padding: 0;
     overflow: auto;
 }
+@font-face {
+    font-family: 'Emoji';
+    src: url('assets/fonts/NotoColorEmoji-Regular.ttf') format('truetype'), url('assets/fonts/NotoColorEmoji-Regular.svg') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+.lbl-emoji{
+    font-family: 'Emoji';
+    font-weight: 400;
+}
