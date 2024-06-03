@@ -3,6 +3,7 @@
 .item{
     //font-family: 'Noto Color Emoji', sans-serif;
     font-family: 'Emoji';
+    text-rendering: optimizeLegibility;
     font-weight: 400;
     cursor: pointer;
 }

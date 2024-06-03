@@ -19,5 +19,6 @@ body, html {
 }
 .lbl-emoji{
     font-family: 'Emoji';
+    text-rendering: optimizeLegibility;
     font-weight: 400;
 }
