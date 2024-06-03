@@ -140,12 +140,12 @@ export class SpeedMainComponent {
 
   onSelect(item:SpeedItem){
     if(item.value == this.targetItem.value){
-      this.setColorState("correct");
+      //this.setColorState("correct");
       this.points++;
       item.value = this.getNewEmoji();
       this.targetItem = this.getRandomItem();
     } else {
-      this.setColorState("wrong");
+      //this.setColorState("wrong");
       this.seconds -= 2;
       this.refreshTime();
     }
