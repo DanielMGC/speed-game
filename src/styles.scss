@@ -13,7 +13,8 @@ body, html {
 }
 @font-face {
     font-family: 'Emoji';
-    src: url('assets/fonts/NotoColorEmoji-Regular.ttf') format('truetype'), url('assets/fonts/NotoColorEmoji-Regular.svg') format('svg');
+    src: url('https://speed-game-vert.vercel.app/assets/fonts/NotoColorEmoji-Regular.ttf') format('truetype');
+    text-rendering: optimizeLegibility;
     font-weight: normal;
     font-style: normal;
 }
