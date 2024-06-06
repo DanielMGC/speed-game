@@ -15,7 +15,7 @@
         <p class="mt20 lh30"><button class="w120" (click)="startBtnClick('hard')"><label class="lbl-emoji">🥵</label> {{ t('hard') }}</button></p>
     </div>
     <div class="mt20" *ngIf="screen == 'game'">
-        <div class="div-hub" [style.width.px]="mainWidth">
+        <div class="div-hub" [hidden]="!ready" [style.width.px]="mainWidth">
             <div class="div-hub-part div-time" [style.width.px]="partWidth">
                 {{time}}
             </div>
@@ -26,10 +26,13 @@
                 {{points}}
             </div>
         </div>
-        <div class="div-main" [style.width.px]="mainWidth">
+        <div class="div-main" [hidden]="!ready" [style.width.px]="mainWidth">
             <div *ngFor="let item of items" class="div-item" [style.width.px]="sizeItem" [style.height.px]="sizeItem" [style.font-size.px]="itemFontSize">
-                <speed-item (click)="onSelect(item)" [item]="item"></speed-item>
+                <speed-item (click)="onSelect(item)" [item]="item" [size]="itemFontSize" (load)="imgLoaded()"></speed-item>
             </div>
+        </div>
+        <div class="div-loading" *ngIf="!ready" [style.width.px]="mainWidth">
+            {{ t('loading') }} 😴
         </div>
     </div>
     <div class="intro" *ngIf="screen == 'end'">

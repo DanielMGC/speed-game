@@ -61,6 +61,10 @@ export class SpeedMainComponent {
   challengeScore: number = 0;
   challengeMode: string = "";
 
+  imgsLoaded: number = 0;
+
+  ready:boolean = false;
+
   private cryptoKey = "2134nsadi9";
 
   constructor(private activatedroute:ActivatedRoute, private translocoService: TranslocoService) {
@@ -108,6 +112,7 @@ export class SpeedMainComponent {
 
     for (let i = 0; i < this.numRows; i++) {
       for (let j = 0; j < this.numCols; j++) {
+        //this.items.push({value: this.getNewEmoji()});
         this.items.push({value: this.getNewEmoji()});
       }
     }
@@ -118,7 +123,7 @@ export class SpeedMainComponent {
   getNewEmoji():string {
     let emoji:string = "";
     do {
-      emoji = EmojiGenerator.getRandomEmoji();
+      emoji = this.getRandomIndex().toString();
     } while (this.existsItemWithValue(emoji));
     return emoji;
   }
@@ -134,18 +139,22 @@ export class SpeedMainComponent {
     return this.items[Math.floor(Math.random() * this.items.length)];
   }
 
+  getRandomIndex():number{
+    return Math.floor(Math.random() * (3575));
+  }
+
   setColorState(colorState: string){
     this.colorState = colorState;
   }
 
   onSelect(item:SpeedItem){
     if(item.value == this.targetItem.value){
-      //this.setColorState("correct");
+      this.setColorState("correct");
       this.points++;
       item.value = this.getNewEmoji();
       this.targetItem = this.getRandomItem();
     } else {
-      //this.setColorState("wrong");
+      this.setColorState("wrong");
       this.seconds -= 2;
       this.refreshTime();
     }
@@ -177,6 +186,8 @@ export class SpeedMainComponent {
   }
 
   startGame(){
+    this.ready = false;
+    this.imgsLoaded = 0;
     this.points = 0;
     this.seconds = 60;
     this.refreshTime();
@@ -185,7 +196,8 @@ export class SpeedMainComponent {
       this.subscription = this.timeInterval.subscribe((integer) => {
         if(this.screen == "game"){
           if(this.seconds > 0){
-            this.seconds--;
+            if(this.ready)
+              this.seconds--;
       
             this.refreshTime();
           } else {
@@ -242,4 +254,8 @@ export class SpeedMainComponent {
     return baseText.replace('{0}', scoreVal.toString()).replace('{1}', this.translocoService.translate(modeVal, {}, this.language));
   }
 
+  imgLoaded(){
+    this.imgsLoaded++;
+    this.ready = this.imgsLoaded >= (this.numCols * this.numRows);
+  }
 }

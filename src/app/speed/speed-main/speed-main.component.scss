@@ -2,7 +2,7 @@
     height: 100vh;
     width: 100%;
     background-color: #ffffff;
-    font-family: 'Englebert', cursive;
+    font-family: 'Englebert', sans-serif;
 }
 
 .div-item{
@@ -21,6 +21,12 @@
 .div-hub {
     margin: auto;
 }
+.div-loading{
+    margin: auto;
+    margin-top: 30px;
+    text-align: center;
+    font-size: 30px;
+}
 
 .div-hub-part {
     text-align: center;
@@ -30,16 +36,16 @@
 
 .div-points{
     margin-right: 0px;
-    font-family: 'Englebert', cursive;
+    font-family: 'Englebert', sans-serif;
 }
 
 .div-time{
     margin-right: 0px;
-    font-family: 'Englebert', cursive;
+    font-family: 'Englebert', sans-serif;
 }
 
 .title{
-    font-family: 'Englebert', cursive;
+    font-family: 'Englebert', sans-serif;
     font-size: 30px;
     text-align: center;
     margin: auto;
@@ -47,7 +53,7 @@
 }
 
 .intro{
-    font-family: 'Englebert', cursive;
+    font-family: 'Englebert', sans-serif;
     font-size: 20px;
     text-align: center;
     margin: auto;
@@ -93,8 +99,4 @@
 }
 .lh30{
     line-height: 30px;
-}
-
-.challenge{
-    
 }

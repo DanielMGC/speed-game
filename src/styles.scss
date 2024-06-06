@@ -11,15 +11,3 @@ body, html {
     padding: 0;
     overflow: auto;
 }
-@font-face {
-    font-family: 'Emoji';
-    src: url('https://speed-game-vert.vercel.app/assets/fonts/NotoColorEmoji-Regular.ttf') format('truetype');
-    text-rendering: optimizeLegibility;
-    font-weight: normal;
-    font-style: normal;
-}
-.lbl-emoji{
-    font-family: 'Emoji';
-    text-rendering: optimizeLegibility;
-    font-weight: 400;
-}

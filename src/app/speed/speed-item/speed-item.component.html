@@ -1,1 +1,4 @@
-<p class="item">{{item.value}}</p>
+<!--<p class="item">{{item.value}}</p>-->
+<div class="div-item" [style.width.px]="size" [style.height.px]="size">
+    <img src="/assets/svg/{{item.value}}.svg" alt="Emoji" (load)="loaded()" />
+</div>

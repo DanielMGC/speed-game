@@ -13,5 +13,6 @@
     "share": "Partagez votre score et défiez vos amis pour le surpasser!",
     "challengeSuccess": "Vous avez réussi de surpasser votre défi de {0} points!",
     "challengeFailure": "Yous n'avez pas réussi de surpasser votre défi de {0} points...",
-    "author": "par DanielMGC"
+    "author": "par DanielMGC",
+    "loading" : "Chargement..."
 }
